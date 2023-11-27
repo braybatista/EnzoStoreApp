@@ -7,19 +7,17 @@ package com.DAO;
 import com.conexion.Conexion;
 import com.controlador.FaceUtil;
 import com.modelo.Usuario;
-import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 
 /**
  *
  * @author User
  */
-public class DAOUsuario {
+public class DAOUsuario implements Serializable {
 
     public void registrarUsuario(Usuario usuario) {
         PreparedStatement ps;
@@ -28,30 +26,25 @@ public class DAOUsuario {
 
         try {
             con = Conexion.getConection();
-            ps = con.prepareStatement("INSERT INTO usuarios (nombres, apellidos, correo, contraseña, tipo_contacto) VALUES (?,?,?,?,?)");
+            ps = con.prepareStatement("INSERT INTO usuarios (nombre, correo, contraseña, tipocontacto) VALUES (?,?,?,?)");
 
             ps.setString(1, usuario.getNombre());
-            ps.setString(2, usuario.getApellido());
-            ps.setString(3, usuario.getCorreo());
-            ps.setString(4, usuario.getContraseña());
-            ps.setString(5, usuario.getTipo_contacto());
+            ps.setString(2, usuario.getCorreo());
+            ps.setString(3, usuario.getContrasenia());
+            ps.setString(4, usuario.getTipoContacto());
 
             int rss = ps.executeUpdate();
 
             if (rss > 0) {
                 FaceUtil.addInfoMessage("registro exitoso");
-                FacesContext context = FacesContext.getCurrentInstance();
-                ExternalContext externalContext = context.getExternalContext();
-                externalContext.redirect("InicioDeSesion.xhtml");
             } else {
                 FaceUtil.addErrorMessage("error al registrarse");
             }
             con.close();
 
-        } catch (SQLException | IOException s) {
+        } catch (SQLException s) {
             FaceUtil.addErrorMessage("error en la base de datos al guardar registro " + s);
         }
-
     }
 
     public Usuario consultar(String correoInicioSesion, String contraseñaInicioSesion) {
@@ -69,17 +62,12 @@ public class DAOUsuario {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-
                 usuario = new Usuario();
                 usuario = Usuario.load(rs);
-
             }
             con.close();
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.getExternalContext().getSessionMap().put("user", usuario);
-        } catch (Exception n) {
-            n.getMessage();
-
+        } catch (SQLException s) {
+            s.getMessage();
         }
         return usuario;
 

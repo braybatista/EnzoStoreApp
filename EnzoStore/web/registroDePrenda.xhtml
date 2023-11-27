@@ -16,43 +16,36 @@
                 <h3>POR FAVOR, REGISTRE SU PRENDA PARA POSTERIORMENTE SUBIRLA AL CATALOGO</h3>
             </div>
             <p:panel>
-                <p:graphicImage class="logoRegistro" value="/resource/images/LogoEnzo.png"/>
-
+                <p:inputText placeholder="Id" value="#{controladorPrenda.prenda.id}"/>
                 <p:inputText placeholder="Nombre" value="#{controladorPrenda.prenda.nombre}"/>
                 <p:inputText placeholder="Colores" value="#{controladorPrenda.prenda.color}"/>
                 <p:inputText placeholder="Tallas" value="#{controladorPrenda.prenda.talla}"/>
-                <p:inputTextarea placeholder="Descripcion del producto" rows="5" cols="30"  maxlength="100"
-                                 counterTemplate="{0} characters remaining." autoResize="false" value="#{controladorPrenda.prenda.descripcion}"/>
+                <p:inputTextarea placeholder="Descripcion del producto" rows="5" cols="30"  maxlength="100" counterTemplate="{0} characters remaining." autoResize="false" value="#{controladorPrenda.prenda.descripcion}"/>
                 <p:inputText placeholder="Precio" value="#{controladorPrenda.prenda.precio}"/>
                 <p:panel>
                     <p:selectOneRadio id="page" value="#{controladorPrenda.prenda.estado}" layout="pageDirection">
                         <f:selectItem itemLabel="Disponible" itemValue="Disponible"/>
                         <f:selectItem itemLabel="No disponible" itemValue="No Disponible"/>
                     </p:selectOneRadio>
-
                 </p:panel>
-
-
             </p:panel>
 
             <p:panel>
                 <p:fileUpload value="#{controladorPrenda.iprenda}" mode="simple"/>
             </p:panel>
 
-            <h:commandButton class="botonRegistrarPrenda" value="Registrar" action="#{controladorPrenda.crearPrenda()}"/>
-            <h:commandButton class="botonRegistrarPrenda" value="actualizar" action="#{controladorPrenda.modificar()}"/>
+            <div id="divRegistrarPrenda">
+                <h:commandButton class="botonRegistrarPrenda"  value="Registrar/Modificar" action="#{controladorPrenda.crearPrenda()}"/>
+            </div>
 
-
-
-
-
-
-
+<!--            <div id="divActualizaPrenda">
+                <h:commandButton class="botonActualizaPrenda"  value="actualizar" action="# {controladorPrenda.modificar()}"/>
+            </div>-->
 
         </h:form>
 
         <div class="card">
-            <h:commandButton class="botonRegistrarPrenda" value="mostrar" action="#{controladorPrenda.mostrarListaPrendas()}"/>
+<!--            <h:commandButton class="botonRegistrarPrenda" value="mostrar" action="#{controladorPrenda.mostrarListaPrendas()}"/>-->
             <h:form enctype="multipart/form-data">
                 <p:dataTable var="prenda" value="#{controladorPrenda.listaprenda}" >
                     <p:column headerText="id">
@@ -77,16 +70,13 @@
                         <h:outputText value="#{prenda.estado}"/>
                     </p:column>
                     <p:column>
-                        <h:commandLink value="Modificar" actionListener="#{controladorPrenda.leerID(prenda)}"/>
+                        <h:commandLink value="Modificar" actionListener="#{controladorPrenda.validarPrenda(prenda.id)}"/>
                     </p:column>
                     <p:column>
                         <h:commandLink value="Eliminar" action="#{controladorPrenda.eliminar(prenda.id)}"/>
-
-
                     </p:column>
 
                 </p:dataTable>
-
 
             </h:form>
         </div>

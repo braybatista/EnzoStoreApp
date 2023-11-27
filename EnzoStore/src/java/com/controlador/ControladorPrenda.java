@@ -18,39 +18,54 @@ import org.primefaces.model.file.UploadedFile;
 
 @ManagedBean
 @SessionScoped
-
 public class ControladorPrenda implements Serializable {
 
     private Prenda prenda = new Prenda();
     private List<Prenda> listaprenda = new ArrayList<>();
     private PrendaService service = new PrendaService();
-
     private UploadedFile iprenda;
 
     public ControladorPrenda() {
-        setPrenda(new Prenda());
-
+        this.setPrenda(new Prenda());
     }
 
     public void crearPrenda() {
-        service.almacenar(prenda);
-        mostrarListaPrendas();
-        subirImagenPrenda();
+        try {
+            if(prenda.getId() == 0){
+                service.almacenar(prenda);
+            } else{
+                service.modificarPrenda(prenda);
+            }
+            mostrarListaPrendas();
+            subirImagenPrenda();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+    
+//    public void modificar() throws Exception {
+//        try {
+//            service.modificarPrenda(prenda);
+//            obtenerListaPrendas();
+//            subirImagenPrenda();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void mostrarListaPrendas() {
+        this.prenda = new Prenda();
         obtenerListaPrendas();
     }
 
     public void obtenerListaPrendas() {
         listaprenda = service.mostrarListaPrenda();
-
     }
 
-    public void leerID(Prenda prendaALeer) throws Exception {
+    public void validarPrenda(int id) throws Exception {
         Prenda temp;
         try {
-            temp = service.leerIDPrenda(prendaALeer);
+            temp = service.validarPrendaService(id);
 
             if (temp != null) {
                 this.prenda = temp;
@@ -58,25 +73,12 @@ public class ControladorPrenda implements Serializable {
         } catch (Exception e) {
             throw e;
         }
-
     }
 
-    public void modificar() throws Exception {
-        try {
-            service.modificarPrenda(prenda);
-            obtenerListaPrendas();
-            subirImagenPrenda();
-        } catch (Exception e) {
-            throw e;
-        }
-
-    }
-
-    public String eliminar(int id) {
+    public void eliminar(int id) {
         service.eliminarPrenda(id);
-        prenda = new Prenda();
+        this.prenda = new Prenda();
         mostrarListaPrendas();
-        return null;
     }
 
     public void subirImagenPrenda() {
@@ -85,13 +87,10 @@ public class ControladorPrenda implements Serializable {
             ServletContext sc = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
             String path = sc.getRealPath("/image.png");
             path = path.replace("image.png", "Imagenes\\Prendas\\");
-            System.out.println(path);
             ImageUtils.copyFile(prenda.getNombre() + ".png", iprenda.getInputStream(), path);
         } catch (IOException e) {
             Logger.getLogger(ControladorPrenda.class.getName()).log(Level.SEVERE, null, e);
-
         }
-
     }
 
     public void setIprenda(UploadedFile iprenda) {
@@ -121,7 +120,6 @@ public class ControladorPrenda implements Serializable {
         } catch (IOException e) {
             System.out.println(e);
         }
-
     }
 
     public void pasarAvistaCliente() {
@@ -132,7 +130,6 @@ public class ControladorPrenda implements Serializable {
         } catch (IOException e) {
             System.out.println(e);
         }
-
     }
 
     public void pasarAInicioDeSesion() {

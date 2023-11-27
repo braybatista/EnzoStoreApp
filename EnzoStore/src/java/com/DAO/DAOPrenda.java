@@ -4,6 +4,7 @@ import com.conexion.Conexion;
 import com.controlador.FaceUtil;
 import com.modelo.Prenda;
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ import java.util.List;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-public class DAOPrenda {
+public class DAOPrenda implements Serializable {
 
     PreparedStatement ps;
     ResultSet rs;
@@ -35,26 +36,22 @@ public class DAOPrenda {
             int rss = ps.executeUpdate();
             if (rss > 0) {
                 FaceUtil.addErrorMessage("Registro de prendas exitoso");
-                FacesContext context = FacesContext.getCurrentInstance();
-                ExternalContext externalContext = context.getExternalContext();
-                externalContext.redirect("CatalogoVirtual.xhtml");
             } else {
                 FaceUtil.addErrorMessage("Error al registrar la prenda");
             }
             con.close();
-        } catch (SQLException | IOException e) {
+        } catch (SQLException e) {
             FaceUtil.addErrorMessage("ERROR AL GUARDAR ---> " + e);
         }
-
     }
 
-    public Prenda leerIDBD(Prenda p) throws Exception {
+    public Prenda validarPrendaDao(int id) throws Exception {
         Prenda prenda = null;
         Connection con = null;
         try {
             con = Conexion.getConection();
             ps = con.prepareStatement("SELECT id, nombre, colores, talla, descripcion, precio, estado FROM prendas WHERE id = ?");
-            ps.setInt(1, p.getId());
+            ps.setInt(1, id);
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -63,7 +60,8 @@ public class DAOPrenda {
                 prenda.setNombre(rs.getString("nombre"));
                 prenda.setColor(rs.getString("colores"));
                 prenda.setTalla(rs.getString("talla"));
-                prenda.setDescripcion(rs.getString("precio"));
+                prenda.setPrecio(rs.getDouble("precio"));
+                prenda.setDescripcion(rs.getString("descripcion"));
                 prenda.setEstado(rs.getString("estado"));
             }
         } catch (Exception e) {
@@ -72,9 +70,7 @@ public class DAOPrenda {
         } finally {
             con.close();
         }
-
         return prenda;
-
     }
 
     public List<Prenda> mostrarListaPrendaBD() {
@@ -108,9 +104,7 @@ public class DAOPrenda {
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
-
     }
 
     public void modificarPrendaBD(Prenda prendaAModificar) throws Exception {
@@ -130,9 +124,7 @@ public class DAOPrenda {
             throw e;
         }finally{
             con.close();
-        
         }
-
     }
 
 }

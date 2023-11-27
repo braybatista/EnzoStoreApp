@@ -15,12 +15,21 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class ControladorVenta {
 
-    private Venta pedido = new Venta();
-    private List<Venta> listaventa = new ArrayList<>();
-    private List<Prenda> listapedidos = new ArrayList<>();
-    private VentaService service = new VentaService();
-    private ControladorPrenda prendaTicket = new ControladorPrenda();
-    private ControladorCarritoBean controladorCarritoBean = new ControladorCarritoBean();
+    private Venta pedido;
+    private List<Venta> listaventa;
+    private List<Prenda> listapedidos;
+    private VentaService service;
+    private ControladorPrenda prendaTicket;
+    private ControladorCarritoBean controladorCarritoBean;
+    
+    public ControladorVenta(){
+        this.pedido = new Venta();
+        this.listaventa = new ArrayList<>();
+        this.listapedidos = new ArrayList<>();
+        this.service = new VentaService();
+        this.prendaTicket = new ControladorPrenda();
+        this.controladorCarritoBean = new ControladorCarritoBean();
+    }
     
     public void pasarACatalogoCliente() {
         try {
@@ -32,22 +41,11 @@ public class ControladorVenta {
         } catch (IOException e) {
             System.out.println(e);
         }
-
     }
 
     public void registrarPedido() throws Exception {
-        service.conectar();
         service.registrarVenta(pedido);
         pasarACatalogoCliente();
-    }
-
-    public void mostrarPedidos() {
-        mostrarListaPedidos();
-    }
-
-    public void mostrarListaPedidos() {
-        listapedidos = service.mostrarListaVenta();
-
     }
 
     public void generarTicketDeComprar() {
@@ -78,14 +76,10 @@ public class ControladorVenta {
         this.listapedidos = listapedidos;
     }
     
-    /**
-     * @return the obtenerTotalCarrito
-     */
     public double obtenerTotalCarrito() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         List<Prenda> productos = (List<Prenda>) facesContext.getExternalContext().getSessionMap().get("carrito");
         return productos.stream().mapToDouble(Prenda::getPrecio).sum();
     }
-
 
 }

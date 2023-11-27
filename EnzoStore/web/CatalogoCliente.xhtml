@@ -4,7 +4,9 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      >
     <h:head>
         <title>Catalogo</title>
         <link rel="stylesheet" href="resource/css/estilosCatalogo.css"/>
@@ -36,9 +38,6 @@
         </script>
     </h:head>
     <h:body class="fondoTienda">
-        <!--        <p:graphicImage class="logoEnzo" value="/resource/images/LogoEnzo.png"/>-->
-        <p:button icon="pi pi-user" onclick="PF('dlg1').show()" class="botonperfil"/>
-        <!--        <h1 class="titulo">BIENVENIDOS A ENZO STORE</h1>-->
 
         <div class="layout-topbar">
             <a class="menu-button" tabindex="0">
@@ -49,15 +48,14 @@
             <p:button icon="pi pi-user" onclick="PF('dlg1').show()" class="botonperfil"/>
         </div>
 
-        <h:outputText value="value-one &lt;br /&gt; value-two &lt;br /&gt; " escape="false" />
-        <h:outputText value="value-one &lt;br /&gt; value-two &lt;br /&gt; " escape="false" />
+        <h:outputText value=" &lt;br /&gt;  &lt;br /&gt; " escape="false" />
+        <h:outputText value=" &lt;br /&gt;  &lt;br /&gt; " escape="false" />
 
         <h:form enctype="multipart/form-data">
             <p:dialog header="MI PERFIL" widgetVar="dlg1" minHeight="40" width="350" showEffect="fade">
                 <p class="m-0">
                     <h3>NOMBRE: #{controladorUsuario.usuario.nombre}</h3>
-                    <h3>APELLIDO: #{controladorUsuario.usuario.apellido}</h3>
-                    <h3> TIPO: #{controladorUsuario.usuario.tipo_contacto}</h3>
+                    <h3> TIPO: #{controladorUsuario.usuario.tipoContacto}</h3>
                 </p>
                 <h:commandButton class="boton-salir" value="Cerrar Sesion" action="#{controladorUsuario.cerrar()}"/>
             </p:dialog>
@@ -72,7 +70,6 @@
                             <h:outputText value="#{prendaAMostrar.estado}"/>
                         </div>
 
-                        <!-- Llamar al método de agregar al carrito del bean -->
                         <h:commandButton value="Agregar al carrito" styleClass="boton-agregar" actionListener="#{controladorCarritoBean.agregarAlCarrito(prendaAMostrar.id, prendaAMostrar.nombre, prendaAMostrar.precio)}"/>
 
                     </p:carousel>
@@ -90,25 +87,32 @@
                         <p:column headerText="ID">
                             <h:outputText value="#{pedido.id}" />
                         </p:column>
+
                         <p:column headerText="Usuario">
-                            <h:outputText value="#{pedido.nombreusuario}" />
+                            <h:outputText value="#{pedido.usuario}" />
                         </p:column>
-                        <p:column headerText="Venta">
-                            <h:outputText value="#{pedido.venta}" />
+
+                        <p:column headerText="Prendas">
+                            <p:dialog header="Detalle Prendas" widgetVar="#{pedido.id}" minHeight="40" width="350" showEffect="fade">
+                                <p class="m-0">
+                                    ID - Nombre - Cantidad
+                                    <h:outputText value=" &lt;br /&gt; " escape="false" />
+                                    <h:outputText value="#{fn:replace(pedido.prendas, ';', ' &lt;br /&gt; ')}" escape="false" />
+                                </p>
+                            </p:dialog>
+                            <p:button icon="pi pi-info-circle" onclick="PF(#{pedido.id}).show()"/>
+                            
                         </p:column>
-                        <p:column headerText="Prenda">
-                            <h:outputText value="#{pedido.prenda}" />
-                        </p:column>
+
                         <p:column headerText="Cantidad">
                             <h:outputText value="#{pedido.cantidad}" />
                         </p:column>
+                        <p:column headerText="Total">
+                            <h:outputText value="#{pedido.total}" />
+                        </p:column>
 
                         <f:facet name="paginatorTopLeft">
-                            <p:commandButton type="button" icon="pi pi-refresh"/>
-                        </f:facet>
-
-                        <f:facet name="paginatorBottomRight">
-                            <p:commandButton type="button" icon="pi pi-cloud-upload"/>
+                            <p:commandButton type="button" icon="pi pi-refresh" action="#{controladorDetallePedido.mostrarPedidos()}"/>
                         </f:facet>
 
                     </p:dataTable>
@@ -142,6 +146,7 @@
                     <h3>Total: $<span id="totalCarrito">#{controladorCarritoBean.totalCarrito}</span></h3>
                     <!-- Llamar al método de realizar compra del bean -->
                     <p:commandButton value="Realizar compra" styleClass="boton-compra" action="#{controladorCarritoBean.realizarCompra()}" />
+                    <p:commandButton value="Limpiar Carrito" styleClass="boton-compra" action="#{controladorCarritoBean.limpiarCarrito()}" />
                 </div>
             </div>
         </h:form>

@@ -1,25 +1,20 @@
 package com.service;
 
 import com.DAO.DAODetallePedido;
-import com.DAO.ManejadorBaseDatos;
-import com.modelo.DetallePedido;
-import java.util.ArrayList;
-
+import com.modelo.DetalleVenta;
+import java.io.Serializable;
 import java.util.List;
 
+public class DetallePedidoService implements Serializable {
 
-public class DetallePedidoService {
-
-    private DAODetallePedido daoObj = new DAODetallePedido();
-    private List<DetallePedido> listaVentas = new ArrayList<>();
-    private ManejadorBaseDatos manejador = new ManejadorBaseDatos();
+    private DAODetallePedido daoObj;
     
-    public void conectar() throws Exception {
-        manejador.conectar();
+    public DetallePedidoService() {
+        this.daoObj = new DAODetallePedido();
     }
 
-    public List<DetallePedido> mostrarListaVenta() {
-        return daoObj.mostrarListaPedidosBD();
+    public List<DetalleVenta> mostrarListaVenta() {
+        return daoObj.mostrarListaVenta();
     }
 
 }

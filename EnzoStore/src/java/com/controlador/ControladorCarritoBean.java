@@ -59,8 +59,15 @@ public class ControladorCarritoBean implements Serializable {
     }
 
     private void actualizarVista() {
-        // Actualizar la vista usando PrimeFaces
-        PrimeFaces.current().ajax().update("carritoProductos", "carritoTotal");
+        try {
+            // Actualizar la vista usando PrimeFaces
+            //PrimeFaces.current().ajax().update("carritoProductos", "carritoTotal");
+            FacesContext context = FacesContext.getCurrentInstance();
+            ExternalContext externalContext = context.getExternalContext();
+            externalContext.redirect("CatalogoCliente.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(ControladorCarritoBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void realizarCompra() {
@@ -77,7 +84,7 @@ public class ControladorCarritoBean implements Serializable {
 
     public void limpiarCarrito() {
         carritoProductos.clear();
-        totalCarrito = 0;
+        setTotalCarrito(0);
         actualizarVista();
     }
 

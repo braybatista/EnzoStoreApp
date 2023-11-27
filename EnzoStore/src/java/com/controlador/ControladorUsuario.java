@@ -1,11 +1,10 @@
 package com.controlador;
 
-
 import com.modelo.Usuario;
 import com.service.UsuarioService;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -19,64 +18,41 @@ public class ControladorUsuario {
     private Usuario usuario = new Usuario();
     private Usuario usuarioInicioSesion = new Usuario();
     private UsuarioService service = new UsuarioService();
-    private PreparedStatement ps;
-    private ResultSet rs;
-    
-     @ManagedProperty("#{controladorPrenda}")
+
+    @ManagedProperty("#{controladorPrenda}")
     private ControladorPrenda conprendas = new ControladorPrenda();
 
-//    @ManagedProperty("#{controladorAdministrador}")
-//    private ControladorAdministrador adcon = new ControladorAdministrador();
-//    
-//    
-//    @ManagedProperty("#{controladorCliente}")
-//    private ControladorCliente clicon = new ControladorCliente();
-
-    
     public ControladorUsuario() {
         usuario = new Usuario();
     }
 
     public void registrarUsuario() {
         service.registroUsuario(usuario);
-
+        cerrar();
     }
 
     public void iniciosesion() {
-        usuario = service.consultarUsuario(usuario.getCorreo(), usuario.getContraseña());
-
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = context.getExternalContext();
+        usuario = service.consultarUsuario(usuario.getCorreo(), usuario.getContrasenia());
+        context.getExternalContext().getSessionMap().put("user", usuario);
         try {
+            switch (usuario.getTipoContacto()) {
+                case "Administrador":
+                    externalContext.redirect("CatalogoVirtual.xhtml");
+                    conprendas.mostrarListaPrendas();
 
-            if (!usuario.getId().equals("")) {
-                        FacesContext context = FacesContext.getCurrentInstance();
-                        ExternalContext externalContext = context.getExternalContext();
-                        
-                switch (usuario.getTipo_contacto()) {
-                    case "Administrador":
-                        externalContext.redirect("CatalogoVirtual.xhtml");
-                        
-                        conprendas.mostrarListaPrendas();
-                        
-                    case "Cliente":
-                        externalContext.redirect("CatalogoCliente.xhtml");
-                        
-        conprendas.mostrarListaPrendas();   
+                case "Cliente":
+                    externalContext.redirect("CatalogoCliente.xhtml");
+                    conprendas.mostrarListaPrendas();
 
-                    default:
-                        System.out.println("El usuario no existe");
-                }
-
-                
-            } else {
-                System.out.println("Usuario nulo");
-
+                default:
+                    System.out.println("El usuario no existe");
+                    navegarAPaginaRegistro();
             }
-
         } catch (Exception e) {
-
             e.getMessage();
         }
-
     }
 
     public ControladorPrenda getConprendas() {
@@ -86,31 +62,34 @@ public class ControladorUsuario {
     public void setConprendas(ControladorPrenda conprendas) {
         this.conprendas = conprendas;
     }
-    
-    
-    
 
     public void navegarAPaginaRegistro() throws IOException {
-
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext externalContext = context.getExternalContext();
         externalContext.redirect("RegistroDeUsuario.xhtml");
-
+    }
+    
+    public void navegarACatalogoAdmin() throws IOException {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = context.getExternalContext();
+        externalContext.redirect("CatalogoVirtual.xhtml");
     }
 
     public String navegarAPaginaInicioDeSesion() {
         return "InicioDeSesion?faces-redirect=true";
     }
-    
-    public void cerrar() throws IOException{
-        usuario = new Usuario();
-        FacesContext context = FacesContext.getCurrentInstance();
-        ExternalContext externalContext = context.getExternalContext();
-        externalContext.redirect("InicioDeSesion.xhtml");
 
+    public void cerrar() {
+        try {
+            usuario = new Usuario();
+            FacesContext context = FacesContext.getCurrentInstance();
+            ExternalContext externalContext = context.getExternalContext();
+            externalContext.getSessionMap().clear();
+            externalContext.redirect("InicioDeSesion.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(ControladorUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    
 
     public Usuario getUsuarioInicioSesion() {
         return usuarioInicioSesion;

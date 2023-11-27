@@ -4,6 +4,7 @@
  */
 package com.modelo;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -11,15 +12,11 @@ import java.sql.SQLException;
  *
  * @author User
  */
-public class Venta {
+public class Venta implements Serializable {
 
     private long id;
-    private String nombreYapellido;
+    private String nombre;
     private String telefono;
-    private String lugardeentrega;
-    private String departamento;
-    private String municipio;
-    private String corregimiento;
     private String direccion;
     private String puntodereferencia;
     private double precio;
@@ -27,7 +24,7 @@ public class Venta {
     public static Venta load(ResultSet rs) throws SQLException {
         Venta venta = new Venta();
         venta.setId(rs.getInt(1));
-        venta.setNombreYapellido(rs.getString(2));
+        venta.setNombre(rs.getString(2));
         venta.setDireccion(rs.getString(3));
         venta.setPuntodereferencia(rs.getString(4));
         venta.setTelefono(rs.getString(5));
@@ -38,9 +35,9 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(int id, String nombreYapellido, String telefono, String direccion, String puntodereferencia, double precio) {
+    public Venta(int id, String nombre, String telefono, String direccion, String puntodereferencia, double precio) {
         this.id = id;
-        this.nombreYapellido = nombreYapellido;
+        this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
         this.puntodereferencia = puntodereferencia;
@@ -63,36 +60,12 @@ public class Venta {
         this.precio = precio;
     }
 
-    public String getNombreYapellido() {
-        return nombreYapellido;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreYapellido(String nombreYapellido) {
-        this.nombreYapellido = nombreYapellido;
-    }
-
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
-
-    public String getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
-    }
-
-    public String getCorregimiento() {
-        return corregimiento;
-    }
-
-    public void setCorregimiento(String corregimiento) {
-        this.corregimiento = corregimiento;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getDireccion() {
@@ -119,17 +92,9 @@ public class Venta {
         this.telefono = telefono;
     }
 
-    public String getLugardeentrega() {
-        return lugardeentrega;
-    }
-
-    public void setLugardeentrega(String lugardeentrega) {
-        this.lugardeentrega = lugardeentrega;
-    }
-
     @Override
     public String toString() {
-        return "Venta{" + "id=" + id + ", nombreYapellido=" + nombreYapellido + ", telefono=" + telefono + ", lugardeentrega=" + lugardeentrega + ", departamento=" + departamento + ", municipio=" + municipio + ", corregimiento=" + corregimiento + ", direccion=" + direccion + ", puntodereferencia=" + puntodereferencia + ", precio=" + precio + '}';
+        return "Venta{" + "id=" + id + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion + ", puntodereferencia=" + puntodereferencia + ", precio=" + precio + '}';
     }
 
 }

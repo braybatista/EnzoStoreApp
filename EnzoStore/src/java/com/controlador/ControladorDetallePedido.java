@@ -1,6 +1,6 @@
 package com.controlador;
 
-import com.modelo.DetallePedido;
+import com.modelo.DetalleVenta;
 import com.service.DetallePedidoService;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,35 +11,35 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class ControladorDetallePedido {
 
-    private List<DetallePedido> listaDetallePedido = new ArrayList<>();
-    private List<DetallePedido> listapedidos = new ArrayList<>();
+    private List<DetalleVenta> listaDetallePedido = new ArrayList<>();
+    private List<DetalleVenta> listapedidos = new ArrayList<>();
     private DetallePedidoService service = new DetallePedidoService();
 
     public ControladorDetallePedido() {
-        mostrarListaPedidos();
+        mostrarListaVenta();
     }
     
     public void mostrarPedidos() {
-        mostrarListaPedidos();
+        mostrarListaVenta();
     }
 
-    private void mostrarListaPedidos() {
+    private void mostrarListaVenta() {
         listapedidos = service.mostrarListaVenta();
     }
 
-    public List<DetallePedido> getListaDetallePedido() {
+    public List<DetalleVenta> getListaDetallePedido() {
         return listaDetallePedido;
     }
 
-    public void setListaDetallePedido(List<DetallePedido> listaDetallePedido) {
+    public void setListaDetallePedido(List<DetalleVenta> listaDetallePedido) {
         this.listaDetallePedido = listaDetallePedido;
     }
 
-    public List<DetallePedido> getListapedidos() {
+    public List<DetalleVenta> getListapedidos() {
         return listapedidos;
     }
 
-    public void setListapedidos(List<DetallePedido> listapedidos) {
+    public void setListapedidos(List<DetalleVenta> listapedidos) {
         this.listapedidos = listapedidos;
     }
 

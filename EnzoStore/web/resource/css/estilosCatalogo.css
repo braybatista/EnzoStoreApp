@@ -207,8 +207,6 @@ body {
     background-color: #f5f5f5;
 }
 
-
-
 .producto-nombre {
     font-size: 18px;
     margin-bottom: 5px;
@@ -266,7 +264,7 @@ body {
 
 /* Estilos para la ventana emergente del carrito */
 .carrito-popup {
-    width: 30%;
+    width: 50%;
     position: fixed;
     top: 50%;
     left: 50%;

@@ -1,12 +1,13 @@
 package com.modelo;
 
 import java.io.File;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
-public class Prenda {
+public class Prenda implements Serializable {
 
     private int id;
     private String nombre;
@@ -72,7 +73,8 @@ public class Prenda {
         this.precio = precio;
     }
 
-    public Prenda(String nombre, String color, String talla, String descripcion, Double precio, String estado) {
+    public Prenda(int id, String nombre, String color, String talla, String descripcion, Double precio, String estado) {
+        this.id = id;
         this.nombre = nombre;
         this.color = color;
         this.talla = talla;
@@ -135,6 +137,11 @@ public class Prenda {
 
     public void setPrecio(Double precio) {
         this.precio = precio;
+    }
+
+    @Override
+    public String toString() {
+        return "Prenda{" + "id=" + id + ", nombre=" + nombre + ", color=" + color + ", talla=" + talla + ", descripcion=" + descripcion + ", precio=" + precio + ", estado=" + estado + ", index=" + index + '}';
     }
 
 }
