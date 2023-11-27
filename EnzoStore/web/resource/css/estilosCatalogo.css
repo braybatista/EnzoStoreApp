@@ -91,20 +91,15 @@
     right: 10%;
     padding: 11px 18px;
     font-size: 11px;
-
-
-
 }
 
 .botonperfil{
-
     position:absolute;
     left: 97%;
     right: 105%;
     padding: 5px 15px;
     font-size: 11px;
     background-color: #ff9999;
-
 }
 
 .logoEnzo{
@@ -112,7 +107,6 @@
     height: 67px;
     width: 120px;
 }
-
 
 .carruselCatalago {
     max-width: 80%;
