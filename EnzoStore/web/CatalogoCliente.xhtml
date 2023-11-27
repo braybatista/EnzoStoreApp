@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Catalogo</title>
+        <link rel="stylesheet" href="resource/css/estilosCatalogo.css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <!-- Importar la clase ControladorCarritoBean -->
+        <h:outputScript library="js" name="ControladorCarritoBean.js" target="head" />
+
+        <script type="text/javascript">
+            var carritoVisible = false;
+            function toggleCarrito() {
+                var carritoPopup = document.getElementById('carritoPopup');
+                if (!carritoVisible) {
+                    carritoPopup.style.display = 'block';
+                    carritoVisible = true;
+                    //mostrarProductosEnCarrito();
+                } else {
+                    carritoPopup.style.display = 'none';
+                    carritoVisible = false;
+                }
+            }
+
+            function closeCarritoPopup() {
+                var carritoPopup = document.getElementById('carritoPopup');
+                carritoPopup.style.display = 'none';
+                carritoVisible = false;
+            }
+
+        </script>
+    </h:head>
+    <h:body class="fondoTienda">
+        <!--        <p:graphicImage class="logoEnzo" value="/resource/images/LogoEnzo.png"/>-->
+        <p:button icon="pi pi-user" onclick="PF('dlg1').show()" class="botonperfil"/>
+        <!--        <h1 class="titulo">BIENVENIDOS A ENZO STORE</h1>-->
+
+        <div class="layout-topbar">
+            <a class="menu-button" tabindex="0">
+                <i class="pi pi-bars"></i>
+            </a>
+            <p:graphicImage class="logoEnzo" value="/resource/images/LogoEnzo.png"/>
+            <h1 class="titulo">BIENVENIDOS A ENZO STORE</h1>
+            <p:button icon="pi pi-user" onclick="PF('dlg1').show()" class="botonperfil"/>
+        </div>
+
+        <h:outputText value="value-one &lt;br /&gt; value-two &lt;br /&gt; " escape="false" />
+        <h:outputText value="value-one &lt;br /&gt; value-two &lt;br /&gt; " escape="false" />
+
+        <h:form enctype="multipart/form-data">
+            <p:dialog header="MI PERFIL" widgetVar="dlg1" minHeight="40" width="350" showEffect="fade">
+                <p class="m-0">
+                    <h3>NOMBRE: #{controladorUsuario.usuario.nombre}</h3>
+                    <h3>APELLIDO: #{controladorUsuario.usuario.apellido}</h3>
+                    <h3> TIPO: #{controladorUsuario.usuario.tipo_contacto}</h3>
+                </p>
+                <h:commandButton class="boton-salir" value="Cerrar Sesion" action="#{controladorUsuario.cerrar()}"/>
+            </p:dialog>
+
+            <div class="carruselCatalago">
+                <div class="vistaproductos">
+                    <p:carousel value="#{controladorPrenda.listaprenda}" var="prendaAMostrar" numVisible="5" circular="true">
+                        <div class="producto-item">
+                            <h:commandButton image="/Imagenes/Prendas/#{prendaAMostrar.nombre}.png" class="imagenPrenda"/>
+                            <h:outputText value="#{prendaAMostrar.nombre}" class="producto-nombre"/>
+                            <h:outputText value="$#{prendaAMostrar.precio}" class="producto-precio"/>
+                            <h:outputText value="#{prendaAMostrar.estado}"/>
+                        </div>
+
+                        <!-- Llamar al método de agregar al carrito del bean -->
+                        <h:commandButton value="Agregar al carrito" styleClass="boton-agregar" actionListener="#{controladorCarritoBean.agregarAlCarrito(prendaAMostrar.id, prendaAMostrar.nombre, prendaAMostrar.precio)}"/>
+
+                    </p:carousel>
+                </div>
+            </div>
+
+            <div class="card">
+                <h:form>
+                    <p:dataTable var="pedido" value="#{controladorDetallePedido.listapedidos}" rows="5"
+                                 paginator="true" paginatorPosition="both"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                 rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+
+                        <p:column headerText="ID">
+                            <h:outputText value="#{pedido.id}" />
+                        </p:column>
+                        <p:column headerText="Usuario">
+                            <h:outputText value="#{pedido.nombreusuario}" />
+                        </p:column>
+                        <p:column headerText="Venta">
+                            <h:outputText value="#{pedido.venta}" />
+                        </p:column>
+                        <p:column headerText="Prenda">
+                            <h:outputText value="#{pedido.prenda}" />
+                        </p:column>
+                        <p:column headerText="Cantidad">
+                            <h:outputText value="#{pedido.cantidad}" />
+                        </p:column>
+
+                        <f:facet name="paginatorTopLeft">
+                            <p:commandButton type="button" icon="pi pi-refresh"/>
+                        </f:facet>
+
+                        <f:facet name="paginatorBottomRight">
+                            <p:commandButton type="button" icon="pi pi-cloud-upload"/>
+                        </f:facet>
+
+                    </p:dataTable>
+                </h:form>
+            </div>
+
+            <div class="carrito-button" onclick="toggleCarrito()">&#128722;</div>
+
+            <div class="carrito-popup" id="carritoPopup">
+                <div class="popup-header">
+                    <div class="popup-title">Carrito</div>
+                    <div class="popup-close" onclick="closeCarritoPopup()">&#215;</div>
+                </div>
+                <div class="carrito">
+                    <h2 class="carrito-titulo" id="carritoTotal">Total: $#{controladorCarritoBean.totalCarrito}</h2>
+                    <div class="carrito-productos" id="carritoProductos">
+                        <!-- Iterar sobre los productos en el carrito -->
+                        <ui:repeat value="#{controladorCarritoBean.carritoProductos}" var="producto">
+                            <div class="carrito-producto">
+<!--                            <img src="/Imagenes/Prendas/#{producto.nombre}.png"/>-->
+                                <h:commandButton image="/Imagenes/Prendas/#{producto.nombre}.png" class="imagenCarrito"/>
+                                <span>#{producto.nombre}</span>
+                                <span>$#{producto.precio}</span>
+                                <!-- Llamar al método de eliminar del carrito del bean -->
+                                <h:commandButton class="boton-salir" value="Eliminar" action="#{controladorCarritoBean.eliminarDelCarrito}">
+                                    <f:param name="index" value="#{producto.index}" />
+                                </h:commandButton>
+                            </div>
+                        </ui:repeat>
+                    </div>
+                    <h3>Total: $<span id="totalCarrito">#{controladorCarritoBean.totalCarrito}</span></h3>
+                    <!-- Llamar al método de realizar compra del bean -->
+                    <p:commandButton value="Realizar compra" styleClass="boton-compra" action="#{controladorCarritoBean.realizarCompra()}" />
+                </div>
+            </div>
+        </h:form>
+
+    </h:body>
+</html>

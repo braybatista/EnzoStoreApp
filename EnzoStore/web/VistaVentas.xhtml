@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Página de Pago</title>
+        <link rel="stylesheet" href="resource/css/estilosPago.css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style>
+            body {
+                background: linear-gradient(45deg, #ff66b2, #fff);
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                color: #fff;
+            }
+
+            .contenedor-pago {
+                background: linear-gradient(45deg, #ff66b2, #fff);
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0px 0px 10px 0px #ff66b2;
+                width: 400px;
+                text-align: center;
+            }
+
+            .titulo-pago {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .form-cliente {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .form-cliente input {
+                margin: 5px;
+                padding: 8px;
+                width: 80%;
+                border: 1px solid #ff66b2;
+                border-radius: 5px;
+            }
+
+            .boton-pago {
+                background-color: #fff;
+                color: #ff66b2;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+
+            .boton-pago:hover {
+                background-color: #ff66b2;
+                color: #fff;
+            }
+
+            #totalCarrito {
+                font-size: 18px;
+                margin-top: 10px;
+            }
+        </style>
+        <script type="text/javascript" language="javascript">
+
+            function realizarPago() {
+                var nombreCliente = document.getElementById('nombreCliente').value;
+                var telefonoCliente = document.getElementById('telefonoCliente').value;
+                var direccionCliente = document.getElementById('direccionCliente').value;
+                var referenciaCliente = document.getElementById('referenciaCliente').value;
+                var totalCarrito = obtenerParametro('totalCarrito');
+
+                // Llamada AJAX al servidor para registrar el pedido
+                controladorVenta.registrarPedido(nombreCliente, telefonoCliente, direccionCliente, referenciaCliente, totalCarrito);
+            }
+
+        </script>
+    </h:head>
+    <h:body>
+        <h:form>
+            <div class="contenedor-pago">
+                <h2 class="titulo-pago">Página de Pago</h2>
+
+                <div class="form-cliente">
+                    <label for="nombreCliente">Nombre y Apellido:</label>
+                    <p:inputText id="nombreCliente" value="#{controladorVenta.pedido.nombreYapellido}" />
+                    <label for="telefonoCliente">Teléfono:</label>
+                    <p:inputText id="telefonoCliente" value="#{controladorVenta.pedido.telefono}" />
+                    <label for="direccionCliente">Dirección:</label>
+                    <p:inputText id="direccionCliente" value="#{controladorVenta.pedido.direccion}" />
+                    <label for="referenciaCliente">Número de Referencia:</label>
+                    <p:inputText id="referenciaCliente" value="#{controladorVenta.pedido.puntodereferencia}" />
+                </div>
+
+                <h3 id="totalCarrito">Total: $#{controladorVenta.obtenerTotalCarrito()}</h3>
+                <h:commandButton value="Realizar Pago" action="#{controladorVenta.registrarPedido()}" styleClass="boton-pago" />
+            </div>
+        </h:form>
+    </h:body>
+</html>

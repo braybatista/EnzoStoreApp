@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Catalogo</title>
+        <link rel="stylesheet" href="resource/css/estilosCatalogo.css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script type="text/javascript" src="resource/js/DetalleProducto.js" language="javascript"></script>
+    </h:head>
+    <h:body class="fondoTienda">
+
+        <p:button icon="pi pi-user" onclick="PF('dlg1').show()" class="botonperfil"/>
+
+        <p:graphicImage class="logoEnzo" value="/resource/images/LogoEnzo.png"/>
+        <h1 class="titulo">BIENVENIDOS A ENZO STORE</h1>
+
+
+
+        <p:dialog header="MI PERFIL" widgetVar="dlg1" minHeight="40" width="350" showEffect="fade">
+            <p class="m-0">
+                <h3>NOMBRE: #{controladorUsuario.usuario.nombre}</h3>
+
+                <h3>APELLIDO: #{controladorUsuario.usuario.apellido}</h3>
+
+                <h3> TIPO: #{controladorUsuario.usuario.tipo_contacto}</h3>
+            </p>
+        </p:dialog>
+        <h:form enctype="multipart/form-data">
+            <h:commandButton value="Cerrar Sesion" action="#{controladorUsuario.cerrar()}"/>
+
+            <h:commandButton value="pasaravista del cliente" action="#{controladorPrenda.pasarAvistaCliente()}"/>
+            <div class="carruselCatalago">
+                <div class="vistaproductos">
+                    <p:carousel value="#{controladorPrenda.listaprenda}" var="prendaAMostrar" numVisible="4" circular="true" >
+                        <div class="producto-item">
+
+                            <h:commandButton image="/Imagenes/Prendas/#{prendaAMostrar.nombre}.png" class="imagenPrenda"/>
+
+                            <h:outputText value="#{prendaAMostrar.id}" class="hidden producto-id" />
+                            <h:outputText value="#{prendaAMostrar.nombre}" class="producto-nombre"/>
+                            <h:outputText value="$#{prendaAMostrar.precio}" class="producto-precio"/>
+                            <h:outputText value="#{prendaAMostrar.talla}" class="producto-tallas"/>
+
+                        </div>
+                    </p:carousel>
+                </div>
+            </div>
+            
+            <h:commandButton class="boton" value="Lugar para registrar prenda" action="#{controladorPrenda.pasarARegistrodePrendas()}"/>
+        </h:form>
+    </h:body>
+</html>

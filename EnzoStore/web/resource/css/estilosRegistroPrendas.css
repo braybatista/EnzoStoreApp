@@ -1,0 +1,43 @@
+.registrodeprendas{
+    text-align: center;
+    width: 850px;
+    margin: 50px auto; /* Centrar horizontalmente en la pantalla */
+    padding: 50px;
+    border: 200px solid #ff9999;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px #252B48; 
+}
+
+.fondoDelRegistroPrenda{
+    background: lightpink;
+    text-align: center;
+}
+.botonRegistrarPrenda{
+    text-align: center;
+    background:#f8f8f8;
+    cursor:pointer;
+    background-color: #ccccff;
+    color: black;
+    margin: 54px 55px;
+    width: 120px;
+    height: 30px;
+
+}
+.titulo{
+    color: #252B48;
+}
+
+.logoEnzoRegistroPrenda{
+    margin: 1px auto;
+    display: flex;
+    height: 100px;
+    width: 110px;
+}
+
+.logoRegistro{
+    margin: 1px auto;
+    display: flex;
+    height: 100px;
+    width: 110px;
+}

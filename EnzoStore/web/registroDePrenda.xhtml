@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registro de prendas</title>
+        <link rel="stylesheet" href="resource/css/estilosRegistroPrendas.css"/>
+    </h:head>
+    <h:body  class="fondoDelRegistroPrenda">
+        <h:form class="registrodeprendas" enctype="multipart/form-data">
+            <h:commandButton class="atras" action="#{controladorUsuario.navegarACatalogoAdmin()}" image="/resource/images/atras.png"/>
+            <div class="titulo">
+                <h2>BIENVENIDO SR ADMINISTRADOR</h2>
+                <h3>POR FAVOR, REGISTRE SU PRENDA PARA POSTERIORMENTE SUBIRLA AL CATALOGO</h3>
+            </div>
+            <p:panel>
+                <p:graphicImage class="logoRegistro" value="/resource/images/LogoEnzo.png"/>
+
+                <p:inputText placeholder="Nombre" value="#{controladorPrenda.prenda.nombre}"/>
+                <p:inputText placeholder="Colores" value="#{controladorPrenda.prenda.color}"/>
+                <p:inputText placeholder="Tallas" value="#{controladorPrenda.prenda.talla}"/>
+                <p:inputTextarea placeholder="Descripcion del producto" rows="5" cols="30"  maxlength="100"
+                                 counterTemplate="{0} characters remaining." autoResize="false" value="#{controladorPrenda.prenda.descripcion}"/>
+                <p:inputText placeholder="Precio" value="#{controladorPrenda.prenda.precio}"/>
+                <p:panel>
+                    <p:selectOneRadio id="page" value="#{controladorPrenda.prenda.estado}" layout="pageDirection">
+                        <f:selectItem itemLabel="Disponible" itemValue="Disponible"/>
+                        <f:selectItem itemLabel="No disponible" itemValue="No Disponible"/>
+                    </p:selectOneRadio>
+
+                </p:panel>
+
+
+            </p:panel>
+
+            <p:panel>
+                <p:fileUpload value="#{controladorPrenda.iprenda}" mode="simple"/>
+            </p:panel>
+
+            <h:commandButton class="botonRegistrarPrenda" value="Registrar" action="#{controladorPrenda.crearPrenda()}"/>
+            <h:commandButton class="botonRegistrarPrenda" value="actualizar" action="#{controladorPrenda.modificar()}"/>
+
+
+
+
+
+
+
+
+        </h:form>
+
+        <div class="card">
+            <h:commandButton class="botonRegistrarPrenda" value="mostrar" action="#{controladorPrenda.mostrarListaPrendas()}"/>
+            <h:form enctype="multipart/form-data">
+                <p:dataTable var="prenda" value="#{controladorPrenda.listaprenda}" >
+                    <p:column headerText="id">
+                        <h:outputText value="#{prenda.id}"/>
+                    </p:column>
+                    <p:column headerText="Nombre de la prenda">
+                        <h:outputText value="#{prenda.nombre}"/>
+                    </p:column>
+                    <p:column headerText="Colores">
+                        <h:outputText value="#{prenda.color}"/>
+                    </p:column>
+                    <p:column headerText="Tallas">
+                        <h:outputText value="#{prenda.talla}"/>
+                    </p:column>
+                    <p:column headerText="Descripcion">
+                        <h:outputText value="#{prenda.descripcion}"/>
+                    </p:column>
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{prenda.precio}"/>
+                    </p:column>
+                    <p:column headerText="Estado">
+                        <h:outputText value="#{prenda.estado}"/>
+                    </p:column>
+                    <p:column>
+                        <h:commandLink value="Modificar" actionListener="#{controladorPrenda.leerID(prenda)}"/>
+                    </p:column>
+                    <p:column>
+                        <h:commandLink value="Eliminar" action="#{controladorPrenda.eliminar(prenda.id)}"/>
+
+
+                    </p:column>
+
+                </p:dataTable>
+
+
+            </h:form>
+        </div>
+    </h:body>
+</html>

@@ -1,0 +1,21 @@
+.pedidos{
+   text-align: center;
+    width: 850px;
+    margin: 50px auto; /* Centrar horizontalmente en la pantalla */
+    padding: 50px;
+    border: 200px solid #ff9999;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px #252B48;
+    
+}
+
+.titulo{
+    text-align: center;
+
+}
+
+.tablapedidos{
+    
+    grid-area: pfa;
+}

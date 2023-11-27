@@ -1,0 +1,21 @@
+Nombre y Apellido: jesus
+Dirección: agasd
+Punto de Referencia: gsadg
+Teléfono: 33561
+Fecha y Hora: 24-11-2023 20:05:41
+Total del Carrito: $200.0
+
+Nombre y Apellido: lhvljvljhvlkh
+Dirección: gyiou
+Punto de Referencia: igui
+Teléfono: 557
+Fecha y Hora: 24-11-2023 20:43:20
+Total del Carrito: $200.0
+
+Nombre y Apellido: samuel
+Dirección: dd
+Punto de Referencia: igui
+Teléfono: 51532
+Fecha y Hora: 24-11-2023 20:59:45
+Total del Carrito: $200.0
+

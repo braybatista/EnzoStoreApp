@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registro De Usuarios</title>
+        <link rel="stylesheet" href="resource/css/estilosPaginaDeRegistro.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandButton class = "inicio" action="#{controladorUsuario.navegarAPaginaInicioDeSesion()}" image="/resource/images/inicio.png"/>
+        
+        </h:form>
+            <h:form class="login">
+                 
+                <h1>REGISTRO DE USUARIOS</h1>
+                <p:graphicImage class="logoUsuario" value="/resource/images/LogoUsuario.png"/>
+                <p:inputText placeholder="Nombre" value="#{controladorUsuario.usuario.nombre}"/>  
+                <p:inputText placeholder="Apellidos" value="#{controladorUsuario.usuario.apellido}"/>  
+                <p:inputText placeholder="Correo" value="#{controladorUsuario.usuario.correo}"/>  
+                <p:inputText placeholder="Contraseña" value="#{controladorUsuario.usuario.contraseña}"/> 
+                 <div>
+                    <p:selectOneMenu placeholder="tipo contacto" value="#{controladorUsuario.usuario.tipo_contacto}">
+                    <f:selectItem itemLabel="Cliente" itemValue="Cliente"/>
+                    <f:selectItem itemLabel="Administrador" itemValue="Administrador"/>
+                </p:selectOneMenu>
+                
+                </div>
+                <h:commandButton class="botonRegistro" value="registrarme" action="#{controladorUsuario.registrarUsuario()}"/>
+                <p:growl/>
+            </h:form>
+        <p:growl/>
+
+        
+    </h:body>
+</html>
+

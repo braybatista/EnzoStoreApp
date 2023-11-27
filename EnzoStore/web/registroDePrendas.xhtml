@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registro de prendas</title>
+        <link rel="stylesheet" href="resource/css/estilosRegistroPrendas.css"/>
+
+    </h:head>
+    <h:body class="fondoDelRegistroPrenda">
+
+        <h:form class="registrodeprendas" enctype="multipart/form-data">
+            <div class="titulo">
+                <h2>BIENVENIDO SR ADMINISTRADOR</h2>
+                <h3>POR FAVOR, REGISTRE SU PRENDA PARA POSTERIORMENTE SUBIRLA AL CATALOGO</h3>
+            </div>
+
+
+            <p:graphicImage class="logoRegistro" value="/resource/images/LogoEnzo.png"/>
+
+            <p:inputText placeholder="Nombre" value="#{controladorPrenda.prenda.nombre}"/>
+            <p:inputText placeholder="Colores" value="#{controladorPrenda.prenda.color}"/>
+            <p:inputText placeholder="Tallas" value="#{controladorPrenda.prenda.talla}"/>
+            <p:inputTextarea placeholder="Descripcion del producto" rows="5" cols="30"  maxlength="100"
+                             counterTemplate="{0} characters remaining." autoResize="false" value="#{controladorPrenda.prenda.descripcion}"/>
+            <p:inputText placeholder="Precio" value="#{controladorPrenda.prenda.precio}"/>
+            <p:selectOneRadio id="page" value="#{controladorPrenda.prenda.estado}" layout="pageDirection">
+                <f:selectItem itemLabel="Disponible" itemValue="Disponible"/>
+                <f:selectItem itemLabel="No disponible" itemValue="No Disponible"/>
+            </p:selectOneRadio>
+
+            <h:commandButton class="botonRegistrarPrenda" value="Registrar" action="#{controladorPrenda.crearPrenda()}"/>
+            <p:panel>
+                <p:fileUpload value="#{controladorPrenda.iprenda}" mode="simple"/>
+            </p:panel>
+
+
+
+
+        </h:form>
+
+
+
+
+
+
+
+    </h:body>
+</html>

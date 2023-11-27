@@ -1,0 +1,45 @@
+.iniciodesesion{
+    text-align: center;
+    width: 850px;
+    margin: 50px auto; /* Centrar horizontalmente en la pantalla */
+    padding: 50px;
+    border: 200px solid #ff9999;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px #252B48; /* Sombra */
+}
+.titulo{
+    text-align: center;
+
+
+}
+
+
+.logoUsuario{
+    margin: 1px auto;
+    display: flex;
+    height: 100px;
+    width: 110px;
+}
+
+#logoContraseña{
+}
+
+
+.formularioInicioSesion{
+    margin: 10px auto;
+    
+
+}
+
+.botonInicioSesion{
+    text-align: center;
+    background:#f8f8f8;
+    cursor:pointer;
+    background-color: #ccccff;
+    color: black;
+    margin: 54px 55px;
+    width: 120px;
+    height: 30px;
+
+}
