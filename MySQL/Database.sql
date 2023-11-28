@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `prendas` (
   `talla` varchar(45) DEFAULT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
   `precio` double DEFAULT NULL,
-  `estado` varchar(45) DEFAULT NULL
+  `estado` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
@@ -47,7 +47,9 @@ CREATE TABLE IF NOT EXISTS `detalle_pedido_prenda` (
   `idventa` int(11) NOT NULL,
   `idprenda` int(11) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fkventa` (`idventa`),
+  CONSTRAINT `fkventa` FOREIGN KEY (`idventa`) REFERENCES `ventas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
