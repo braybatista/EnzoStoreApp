@@ -1,0 +1,50 @@
+factura: 19
+Nombre y Apellido: brayan batista
+Direccion: n/a
+Punto de Referencia: 12345666
+Telefono: 3003526750
+Fecha y Hora: 27-11-2023 19:55:23
+Productos: 2 - Camisa - 1 - null;3 - Sueter - 1 - null;43 - Pantalon - 1 - null;44 - Pantalon - 1 - null
+Cantidad: 4
+Total del Carrito: $1151.2
+
+factura: 1
+Nombre y Apellido: brayan batista
+Direccion: n/a
+Punto de Referencia: 12345666
+Telefono: 3003526750
+Fecha y Hora: 27-11-2023 20:01:18
+Productos: 1 - Pantalon - 3 - 25
+Cantidad: 3
+Total del Carrito: $3000.0
+
+factura: 2
+Nombre y Apellido: brayan batista
+Direccion: n/a
+Punto de Referencia: 1
+Telefono: 3003526750
+Fecha y Hora: 27-11-2023 20:04:39
+Productos: 43 - Pantalon - 3 - 23
+Cantidad: 3
+Total del Carrito: $150.3
+
+factura: 3
+Nombre y Apellido: brayan batista
+Direccion: n/a
+Punto de Referencia: 2
+Telefono: 3003526750
+Fecha y Hora: 27-11-2023 20:06:57
+Productos: 1 - Pantalon - 1 - 25
+Cantidad: 1
+Total del Carrito: $1000.0
+
+factura: 4
+Nombre y Apellido: brayan batista
+Direccion: n/a
+Punto de Referencia: 3
+Telefono: 3003526750
+Fecha y Hora: 27-11-2023 20:09:15
+Productos: 44 - Pantalon - 1 - 25
+Cantidad: 1
+Total del Carrito: $50.1
+

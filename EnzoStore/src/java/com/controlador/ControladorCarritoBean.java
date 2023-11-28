@@ -16,12 +16,16 @@ import org.primefaces.PrimeFaces;
 @ManagedBean
 @SessionScoped
 public class ControladorCarritoBean implements Serializable {
-
+    private ControladorDetallePedido controladorDetallePedido;
     private List<Prenda> carritoProductos = new ArrayList<>();
     private double totalCarrito = 0;
+    
+    public ControladorCarritoBean(){
+        controladorDetallePedido = new ControladorDetallePedido();
+    }
 
-    public void agregarAlCarrito(int id, String nombre, Double precio) {
-        Prenda prenda = new Prenda(id, nombre, precio);
+    public void agregarAlCarrito(Prenda prendaAMostrar) {
+        Prenda prenda = new Prenda(prendaAMostrar);
         prenda.setIndex(carritoProductos.size()); // Asignar índice único
         carritoProductos.add(prenda);
         actualizarTotalCarrito();

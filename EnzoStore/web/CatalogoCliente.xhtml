@@ -73,7 +73,7 @@
                             <h:outputText value="#{prendaAMostrar.estado}"/>
                         </div>
 
-                        <h:commandButton value="Agregar al carrito" styleClass="boton-agregar" actionListener="#{controladorCarritoBean.agregarAlCarrito(prendaAMostrar.id, prendaAMostrar.nombre, prendaAMostrar.precio)}"/>
+                        <h:commandButton value="Agregar al carrito" styleClass="boton-agregar" actionListener="#{controladorCarritoBean.agregarAlCarrito(prendaAMostrar)}"/>
 
                     </p:carousel>
                 </div>
@@ -98,7 +98,7 @@
                         <p:column headerText="Prendas">
                             <p:dialog header="Detalle Prendas" widgetVar="#{pedido.id}" minHeight="40" width="350" showEffect="fade">
                                 <p class="m-0">
-                                    ID - Nombre - Cantidad
+                                    ID - Nombre - Cantidad - Talla
                                     <h:outputText value=" &lt;br /&gt; " escape="false" />
                                     <h:outputText value="#{fn:replace(pedido.prendas, ';', ' &lt;br /&gt; ')}" escape="false" />
                                 </p>

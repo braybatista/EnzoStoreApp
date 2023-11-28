@@ -67,10 +67,14 @@ public class Prenda implements Serializable {
     public Prenda() {
     }
 
-    public Prenda(int id, String nombre, Double precio) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
+    public Prenda(Prenda copia) {
+        this.id = copia.getId();
+        this.nombre = copia.getNombre();
+        this.color = copia.getColor();
+        this.talla = copia.getTalla();
+        this.descripcion = copia.getDescripcion();
+        this.precio = copia.getPrecio();
+        this.estado = copia.getEstado();
     }
 
     public Prenda(int id, String nombre, String color, String talla, String descripcion, Double precio, String estado) {
