@@ -38,6 +38,7 @@ public class ControladorPrenda implements Serializable {
             }
             mostrarListaPrendas();
             subirImagenPrenda();
+            pasarARegistrodePrendas();
         } catch (Exception e) {
             e.printStackTrace();
         }

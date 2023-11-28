@@ -9,9 +9,9 @@
         <link rel="stylesheet" href="resource/css/estilosPaginaDeRegistro.css"/>
     </h:head>
     <h:body>
-        <h:form>
+<!--        <h:form>
             <h:commandButton class = "inicio" action="#{controladorUsuario.navegarAPaginaInicioDeSesion()}" image="/resource/images/inicio.png"/>
-        </h:form>
+        </h:form>-->
         <h:form class="login">
 
             <h1>REGISTRO DE USUARIOS</h1>
@@ -24,9 +24,12 @@
                     <f:selectItem itemLabel="Cliente" itemValue="Cliente"/>
 <!--                    <f:selectItem itemLabel="Administrador" itemValue="Administrador"/>-->
                 </p:selectOneMenu>
-
             </div>
-            <h:commandButton class="botonRegistro" value="registrarme" action="#{controladorUsuario.registrarUsuario()}"/>
+            
+            <h:outputText value=" &lt;br /&gt;  &lt;br /&gt; " escape="false" />
+            
+            <h:commandButton class="boton-agregar" value="Registrar" action="#{controladorUsuario.registrarUsuario()}"/>
+            <h:commandButton class="boton-salir" value="Regresar" action="#{controladorUsuario.navegarAPaginaInicioDeSesion()}"/>
             <p:growl/>
         </h:form>
         <p:growl/>
