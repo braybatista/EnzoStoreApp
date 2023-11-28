@@ -26,13 +26,20 @@
     cursor: pointer;
 }
 
+.card {
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 5px 5px 15px #252B48;
+    border-radius: 10px;
+}
+
 .botonperfil{
     position:absolute;
     left: 97%;
     right: 105%;
     padding: 5px 15px;
     font-size: 11px;
-    background-color: #ff9999;
+    background-color: #f8f9fa;
 }
 
 .atras {
@@ -50,17 +57,16 @@
 
 .registrodeprendas{
     text-align: center;
-    width: 850px;
-    margin: 50px auto; /* Centrar horizontalmente en la pantalla */
-    padding: 50px;
-    border: 200px solid #ff9999;
+    width: 90%;
+    margin: 50px auto;
+    border: 200px solid #f8f9fa;
     background-color: #f8f8f8;
     border-radius: 10px;
     box-shadow: 5px 5px 15px #252B48; 
 }
 
 .fondoDelRegistroPrenda{
-    background: lightpink;
+    background: #f8f9fa;
     text-align: center;
 }
 
@@ -86,8 +92,22 @@
     height: 30px;
 }
 
+.boton-agregar {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.boton-agregar:hover {
+    background-color: #0056b3;
+}
+
 .boton-salir {
-    background-color: #ff9999;
+    background-color: #d84b4b;
     color: #fff;
     border: none;
     padding: 5px 10px;

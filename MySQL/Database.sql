@@ -49,9 +49,7 @@ CREATE TABLE IF NOT EXISTS `detalle_pedido_prenda` (
   `cantidad` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fkventa` (`idventa`),
-  KEY `fkprenda` (`idprenda`),
-  CONSTRAINT `fkventa` FOREIGN KEY (`idventa`) REFERENCES `ventas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fkprenda` FOREIGN KEY (`idprenda`) REFERENCES `prendas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fkventa` FOREIGN KEY (`idventa`) REFERENCES `ventas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

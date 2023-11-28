@@ -35,19 +35,12 @@
 }
 
 .fondoTienda{
-    background: lightpink;
+    background: #f8f8f8;
     text-align: center;
-
 }
 
-/*.titulo{
-    font-size: 30px;
-}*/
-
 .titulo {
-    background: #f8f9fa;
     color: #495057;
-    border: 1px solid #e9ecef;
     margin: 0 auto;
     border-width: 0 0 1px 0;
     text-align: center;
@@ -67,10 +60,10 @@
 
 .boton {
     text-align: center;
-    background:#ff9999;
+    background:#f8f9fa;
     cursor:pointer;
     border-radius: 35px;
-    background-color: #ff9999;
+    background-color: #f8f9fa;
     color: black;
     margin: 4px 2px;
     width: 200px;
@@ -99,7 +92,7 @@
     right: 105%;
     padding: 5px 15px;
     font-size: 11px;
-    background-color: #ff9999;
+    background-color: #f8f9fa;
 }
 
 .logoEnzo{
@@ -228,7 +221,7 @@ body {
 }
 
 .boton-salir {
-    background-color: #ff9999;
+    background-color: #d84b4b;
     color: #fff;
     border: none;
     padding: 5px 10px;

@@ -35,23 +35,27 @@ public class ControladorUsuario {
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext externalContext = context.getExternalContext();
         usuario = service.consultarUsuario(usuario.getCorreo(), usuario.getContrasenia());
-        context.getExternalContext().getSessionMap().put("user", usuario);
-        try {
-            switch (usuario.getTipoContacto()) {
-                case "Administrador":
-                    externalContext.redirect("CatalogoVirtual.xhtml");
-                    conprendas.mostrarListaPrendas();
+        if(usuario == null){
+            cerrar();
+        } else{
+            context.getExternalContext().getSessionMap().put("user", usuario);
+            try {
+                switch (usuario.getTipoContacto()) {
+                    case "Administrador":
+                        externalContext.redirect("CatalogoVirtual.xhtml");
+                        conprendas.mostrarListaPrendas();
 
-                case "Cliente":
-                    externalContext.redirect("CatalogoCliente.xhtml");
-                    conprendas.mostrarListaPrendas();
+                    case "Cliente":
+                        externalContext.redirect("CatalogoCliente.xhtml");
+                        conprendas.mostrarListaPrendas();
 
-                default:
-                    System.out.println("El usuario no existe");
-                    navegarAPaginaRegistro();
+                    default:
+                        System.out.println("El usuario no existe");
+                        navegarAPaginaRegistro();
+                }
+            } catch (Exception e) {
+                e.getMessage();
             }
-        } catch (Exception e) {
-            e.getMessage();
         }
     }
 

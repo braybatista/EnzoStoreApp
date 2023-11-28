@@ -11,18 +11,14 @@
         <h:form class="iniciodesesion" enctype="multipart/form-data">
             <h1>INICIAR SESION</h1>
             <p:graphicImage class="logoUsuario" value="/resource/images/LogoUsuario.png"/>
-                <p:inputText placeholder="Correo Electronico" value="#{controladorUsuario.usuario.correo}"/>  
-                <p:inputText placeholder="Contraseña" value="#{controladorUsuario.usuario.contrasenia}"/>
-             <h:commandButton class="botonInicioSesion" value="Iniciar Sesion" action="#{controladorUsuario.iniciosesion()}"/>
+            <p:inputText placeholder="Correo Electronico" value="#{controladorUsuario.usuario.correo}"/>  
+            <p:inputText placeholder="Contraseña" value="#{controladorUsuario.usuario.contrasenia}"/>
+            <h:commandButton class="botonInicioSesion" value="Iniciar Sesion" action="#{controladorUsuario.iniciosesion()}"/>
 
             <div>
                 <h:commandLink value="¿No Tiene cuenta?" action="#{controladorUsuario.navegarAPaginaRegistro()}"/>
-
             </div>
-
         </h:form>
-        
-
     </h:body>
 </html>
 

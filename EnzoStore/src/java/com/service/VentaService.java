@@ -54,6 +54,11 @@ public class VentaService implements Serializable {
                 daoDetallePedido.insertarDetallePedido(sentenciaDetalle);
             }
             
+            prendas = dataFormatted.entrySet()
+                .stream()
+                .map(e -> String.valueOf(e.getValue().get("id") + " - " + e.getValue().get("nombre") + " - " + e.getValue().get("cantidad") + " - " + e.getValue().get("talla")))
+                .collect(Collectors.joining(";")); 
+            
             String informacionRegistro
                         = "factura: " + objVent.getId() + "\n"
                         + "Nombre y Apellido: " + v.getNombre() + "\n"
@@ -84,6 +89,7 @@ public class VentaService implements Serializable {
             dataMap.put("nombre", user.getNombre());
             dataMap.put("cantidad", count);
             dataMap.put("valor", user.getPrecio());
+            dataMap.put("talla", user.getTalla());
             dataFormatted.put(user.getId(), dataMap);
         });
 

@@ -8,68 +8,7 @@
         <title>Página de Pago</title>
         <link rel="stylesheet" href="resource/css/estilosPago.css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <style>
-            body {
-                background: linear-gradient(45deg, #ff66b2, #fff);
-                font-family: 'Arial', sans-serif;
-                margin: 0;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                color: #fff;
-            }
 
-            .contenedor-pago {
-                background: linear-gradient(45deg, #ff66b2, #fff);
-                border-radius: 10px;
-                padding: 20px;
-                box-shadow: 0px 0px 10px 0px #ff66b2;
-                width: 400px;
-                text-align: center;
-            }
-
-            .titulo-pago {
-                font-size: 24px;
-                margin-bottom: 20px;
-            }
-
-            .form-cliente {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin-bottom: 20px;
-            }
-
-            .form-cliente input {
-                margin: 5px;
-                padding: 8px;
-                width: 80%;
-                border: 1px solid #ff66b2;
-                border-radius: 5px;
-            }
-
-            .boton-pago {
-                background-color: #fff;
-                color: #ff66b2;
-                border: none;
-                padding: 10px 20px;
-                font-size: 16px;
-                cursor: pointer;
-                border-radius: 5px;
-            }
-
-            .boton-pago:hover {
-                background-color: #ff66b2;
-                color: #fff;
-            }
-
-            #totalCarrito {
-                font-size: 18px;
-                margin-top: 10px;
-            }
-        </style>
         <script type="text/javascript" language="javascript">
 
             function realizarPago() {
@@ -87,6 +26,14 @@
     </h:head>
     <h:body>
         <h:form>
+            <div class="layout-topbar">
+                <a class="menu-button" tabindex="0">
+                    <i class="pi pi-bars"></i>
+                </a>
+                <p:graphicImage class="logoEnzo" value="/resource/images/LogoEnzo.png"/>
+                <h1 class="titulo">BIENVENIDOS A ENZO STORE</h1>
+                <p:button icon="pi pi-user" onclick="PF('dlg1').show()" class="botonperfil"/>
+            </div>
             <div class="contenedor-pago">
                 <h2 class="titulo-pago">Página de Pago</h2>
 
@@ -102,7 +49,8 @@
                 </div>
 
                 <h3 id="totalCarrito">Total: $#{controladorVenta.obtenerTotalCarrito()}</h3>
-                <h:commandButton value="Realizar Pago" action="#{controladorVenta.registrarPedido()}" styleClass="boton-pago" />
+                <h:commandButton value="Realizar Pago" action="#{controladorVenta.registrarPedido()}" class="boton-agregar"/>
+                <h:commandButton value="Regresar" action="#{controladorVenta.pasarACatalogoCliente()}" class="boton-salir"/>
             </div>
         </h:form>
     </h:body>
