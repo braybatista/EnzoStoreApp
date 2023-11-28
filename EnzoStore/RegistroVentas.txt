@@ -48,3 +48,13 @@ Productos: 44 - Pantalon - 1 - 25
 Cantidad: 1
 Total del Carrito: $50.1
 
+factura: 5
+Nombre y Apellido: brayan batista
+Direccion: n/a
+Punto de Referencia: 3
+Telefono: 3003526750
+Fecha y Hora: 27-11-2023 20:16:56
+Productos: 1 - Pantalon - 1 - 25;2 - Camisa - 1 - 25;3 - Sueter - 1 - 25;43 - Pantalon - 1 - 23
+Cantidad: 4
+Total del Carrito: $2101.1
+
