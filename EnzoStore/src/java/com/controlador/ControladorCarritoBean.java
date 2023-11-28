@@ -40,7 +40,7 @@ public class ControladorCarritoBean implements Serializable {
             // Volver a calcular el total del carrito
             actualizarTotalCarrito();
             // Actualizar la vista de la DataTable en la página
-            PrimeFaces.current().ajax().update("carritoProductos", "carritoTotal");
+            actualizarVista();
         }
     }
 
@@ -65,7 +65,7 @@ public class ControladorCarritoBean implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             ExternalContext externalContext = context.getExternalContext();
             externalContext.redirect("CatalogoCliente.xhtml");
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(ControladorCarritoBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
