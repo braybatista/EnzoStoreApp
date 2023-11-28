@@ -1,0 +1,136 @@
+.layout-topbar {
+    background-color: var(--surface-a);
+    padding: 0;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 997;
+    box-shadow: 0 0 4px rgba(0,0,0,.25);
+    border-bottom: 1px solid var(--surface-d);
+    display: flex;
+    align-items: center;
+    padding: 0 35px;
+}
+
+.layout-topbar .menu-button {
+    display: none;
+    color: var(--text-color);
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    transition: background-color .2s;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.card {
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 5px 5px 15px #252B48;
+    border-radius: 10px;
+}
+
+.botonperfil{
+    position:absolute;
+    left: 97%;
+    right: 105%;
+    padding: 5px 15px;
+    font-size: 11px;
+    background-color: #f8f9fa;
+}
+
+.atras {
+    width: 20px;
+}
+
+.inputfield {
+    width: 85%;
+}
+
+.panel-custom{
+    width: 85%;
+    margin-left: 7.5%;
+}
+
+.registrodeprendas{
+    text-align: center;
+    width: 90%;
+    margin: 50px auto;
+    border: 200px solid #f8f9fa;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px #252B48; 
+}
+
+.fondoDelRegistroPrenda{
+    background: #f8f9fa;
+    text-align: center;
+}
+
+.botonRegistrarPrenda{
+    text-align: center;
+    background:#f8f8f8;
+    cursor:pointer;
+    background-color: #ccccff;
+    color: black;
+    margin: 54px 55px;
+    width: 120px;
+    height: 30px;
+}
+
+.botonActualizaPrenda{
+    text-align: center;
+    background:#f8f8f8;
+    cursor:pointer;
+    background-color: #ccccff;
+    color: black;
+    margin: 54px 55px;
+    width: 120px;
+    height: 30px;
+}
+
+.boton-agregar {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.boton-agregar:hover {
+    background-color: #0056b3;
+}
+
+.boton-salir {
+    background-color: #d84b4b;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.titulo{
+    color: #252B48;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.logoEnzo{
+    display: flex;
+    height: 67px;
+    width: 120px;
+}
+
+.logoRegistro{
+    margin: 1px auto;
+    display: flex;
+    height: 100px;
+    width: 110px;
+}

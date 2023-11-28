@@ -1,0 +1,71 @@
+.boton-agregar {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.boton-agregar:hover {
+    background-color: #0056b3;
+}
+
+.boton-salir {
+    background-color: #d84b4b;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.atras {
+    width: 20px;
+}
+
+.login{
+   text-align: center;
+    width: 850px;
+    margin: 50px auto; /* Centrar horizontalmente en la pantalla */
+    padding: 50px;
+    border: 200px solid #f8f9fa;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px #252B48;
+    
+}
+
+.titulo{
+    text-align: center;
+}
+
+.logoUsuario{
+    margin: 1px auto;
+    display: flex;
+    height: 100px;
+    width: 110px;
+}
+
+.botonRegistro{
+    text-align: center;
+    background:#f8f8f8;
+    cursor:pointer;
+    background-color: #ccccff;
+    color: black;
+    margin: 54px 55px;
+    width: 120px;
+    height: 30px;
+
+}
+
+.inicio{
+    
+    margin: 1px auto;
+    display: flex;
+    height: 110px;
+    width: 120px;
+    
+}

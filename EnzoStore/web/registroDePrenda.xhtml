@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      >
+    <h:head>
+        <title>Registro de prendas</title>
+        <link rel="stylesheet" href="resource/css/estilosRegistroPrendas.css"/>
+    </h:head>
+    <h:body  class="fondoDelRegistroPrenda">
+        <div class="layout-topbar">
+            <a class="menu-button" tabindex="0">
+                <i class="pi pi-bars"></i>
+            </a>
+            <p:graphicImage class="logoEnzo" value="/resource/images/LogoEnzo.png"/>
+            <h1 class="titulo">BIENVENIDOS A ENZO STORE</h1>
+            <p:button icon="pi pi-user" onclick="PF('dlg1').show()" class="botonperfil"/>
+        </div>
+
+        <h:outputText value=" &lt;br /&gt;  &lt;br /&gt; " escape="false" />
+        <h:outputText value=" &lt;br /&gt;  &lt;br /&gt; " escape="false" />
+
+
+        <h:form class="registrodeprendas" enctype="multipart/form-data">
+            <p:dialog header="MI PERFIL" widgetVar="dlg1" minHeight="40" width="350" showEffect="fade">
+                <p class="m-0">
+                    <h3>NOMBRE: #{controladorUsuario.usuario.nombre}</h3>
+                    <h3> TIPO: #{controladorUsuario.usuario.tipoContacto}</h3>
+                </p>
+                <h:commandButton class="boton-salir" value="Cerrar Sesion" action="#{controladorUsuario.cerrar()}"/>
+            </p:dialog>
+
+            <h:commandButton class="atras" action="#{controladorUsuario.navegarACatalogoAdmin()}" image="/resource/images/atras.png"/>
+            <div class="titulo">
+                <h2>BIENVENIDO SR ADMINISTRADOR</h2>
+                <h5>POR FAVOR, REGISTRE SU PRENDA PARA POSTERIORMENTE SUBIRLA AL CATALOGO</h5>
+            </div>
+            <p:panel>
+                <h:inputHidden class="inputfield" value="#{controladorPrenda.prenda.id}"/>
+<!--                <p:inputText class="inputfield" placeholder="Id" value="#{controladorPrenda.prenda.id}"/>-->
+                <p:inputText class="inputfield" placeholder="Nombre" value="#{controladorPrenda.prenda.nombre}"/>
+                <p:inputText class="inputfield" placeholder="Colores" value="#{controladorPrenda.prenda.color}"/>
+                <p:inputText class="inputfield" placeholder="Tallas" value="#{controladorPrenda.prenda.talla}"/>
+                <p:inputTextarea class="inputfield" placeholder="Descripcion del producto" rows="5" cols="30"  maxlength="100" counterTemplate="{0} characters remaining." autoResize="false" value="#{controladorPrenda.prenda.descripcion}"/>
+                <p:inputText class="inputfield" placeholder="Precio" value="#{controladorPrenda.prenda.precio}"/>
+                <p:panel class="inputfield panel-custom">
+                    <p:selectOneRadio id="page" value="#{controladorPrenda.prenda.estado}" layout="pageDirection">
+                        <f:selectItem itemLabel="Disponible" itemValue="Disponible"/>
+                        <f:selectItem itemLabel="No disponible" itemValue="No Disponible"/>
+                    </p:selectOneRadio>
+                </p:panel>
+            </p:panel>
+
+
+            <p:panel>
+                <p:fileUpload value="#{controladorPrenda.iprenda}" mode="simple"/>
+            </p:panel>
+
+            <h:outputText value=" &lt;br /&gt;  &lt;br /&gt; " escape="false" />
+
+            <div id="divRegistrarPrenda">
+                <h:commandButton class="boton-agregar"  value="Registrar/Modificar" action="#{controladorPrenda.crearPrenda()}"/>
+            </div>
+
+            <!--            <div id="divActualizaPrenda">
+                            <h:commandButton class="botonActualizaPrenda"  value="actualizar" action="# {controladorPrenda.modificar()}"/>
+                        </div>-->
+
+        </h:form>
+
+<!--        <div class="card">
+            <h:form>
+                <p:dataTable var="pedido" value="#{controladorDetallePedido.listapedidos}" rows="5"
+                             paginator="true" paginatorPosition="both"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                             rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+
+                    <p:column headerText="ID">
+                        <h:outputText value="#{pedido.id}" />
+                    </p:column>
+
+                    <p:column headerText="Usuario">
+                        <h:outputText value="#{pedido.usuario}" />
+                    </p:column>
+
+                    <p:column headerText="Prendas">
+                        <p:dialog header="Detalle Prendas" widgetVar="#{pedido.id}" minHeight="40" width="350" showEffect="fade">
+                            <p class="m-0">
+                                ID - Nombre - Cantidad
+                                <h:outputText value=" &lt;br /&gt; " escape="false" />
+                                <h:outputText value="#{fn:replace(pedido.prendas, ';', ' &lt;br /&gt; ')}" escape="false" />
+                            </p>
+                        </p:dialog>
+                        <p:button icon="pi pi-info-circle" onclick="PF(#{pedido.id}).show()"/>
+
+                    </p:column>
+
+                    <p:column headerText="Cantidad">
+                        <h:outputText value="#{pedido.cantidad}" />
+                    </p:column>
+                    <p:column headerText="Total">
+                        <h:outputText value="#{pedido.total}" />
+                    </p:column>
+
+                    <f:facet name="paginatorTopLeft">
+                        <p:commandButton type="button" icon="pi pi-refresh" action="#{controladorDetallePedido.mostrarPedidos()}"/>
+                    </f:facet>
+
+                </p:dataTable>
+            </h:form>
+        </div>-->
+
+        <div class="card">
+            <!--            <h:commandButton class="botonRegistrarPrenda" value="mostrar" action="# {controladorPrenda.mostrarListaPrendas()}"/>-->
+            <h:form enctype="multipart/form-data">
+                <p:dataTable var="prenda" value="#{controladorPrenda.listaprenda}" rows="5"
+                         paginator="true" paginatorPosition="both"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                         rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+                    
+                    <p:column headerText="id">
+                        <h:outputText value="#{prenda.id}"/>
+                    </p:column>
+                    <p:column headerText="Nombre de la prenda">
+                        <h:outputText value="#{prenda.nombre}"/>
+                    </p:column>
+                    <p:column headerText="Colores">
+                        <h:outputText value="#{prenda.color}"/>
+                    </p:column>
+                    <p:column headerText="Tallas">
+                        <h:outputText value="#{prenda.talla}"/>
+                    </p:column>
+                    <p:column headerText="Descripcion">
+                        <h:outputText value="#{prenda.descripcion}"/>
+                    </p:column>
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{prenda.precio}"/>
+                    </p:column>
+                    <p:column headerText="Estado">
+                        <h:outputText value="#{prenda.estado}"/>
+                    </p:column>
+                    <p:column>
+                        <h:commandLink value="Modificar" actionListener="#{controladorPrenda.validarPrenda(prenda.id)}"/>
+                    </p:column>
+                    <p:column>
+                        <h:commandLink value="Eliminar" action="#{controladorPrenda.eliminar(prenda.id)}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+        </div>
+    </h:body>
+</html>
