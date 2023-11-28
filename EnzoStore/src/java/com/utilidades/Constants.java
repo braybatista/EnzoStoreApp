@@ -14,5 +14,6 @@ public class Constants {
     public static final String USERNAME = "root";
     public static final String PASSWORD = "toor";
     public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+   public static final String RUTA_ARCHIVO = "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\EnzoStoreApp\\EnzoStore\\RegistroVentas.txt";
     
 }

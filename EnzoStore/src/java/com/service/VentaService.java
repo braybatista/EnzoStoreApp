@@ -7,6 +7,7 @@ import com.controlador.FaceUtil;
 import com.modelo.Prenda;
 import com.modelo.Usuario;
 import com.modelo.Venta;
+import com.utilidades.Constants;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
@@ -54,11 +55,6 @@ public class VentaService implements Serializable {
                 daoDetallePedido.insertarDetallePedido(sentenciaDetalle);
             }
             
-            prendas = dataFormatted.entrySet()
-                .stream()
-                .map(e -> String.valueOf(e.getValue().get("id") + " - " + e.getValue().get("nombre") + " - " + e.getValue().get("cantidad") + " - " + e.getValue().get("talla")))
-                .collect(Collectors.joining(";")); 
-            
             String informacionRegistro
                         = "factura: " + objVent.getId() + "\n"
                         + "Nombre y Apellido: " + v.getNombre() + "\n"
@@ -70,7 +66,7 @@ public class VentaService implements Serializable {
                         + "Cantidad: " + cantidadProductos + "\n"
                         + "Total del Carrito: $" + valorTotal + "\n\n";
 
-            escribirEnArchivo("C:\\Users\\USUARIO\\OneDrive\\Escritorio\\EnzoStore\\RegistroVentas.txt", informacionRegistro);
+            escribirEnArchivo(Constants.RUTA_ARCHIVO, informacionRegistro);
             FaceUtil.addInfoMessage("pedido realizado conexito");
                 
         } catch (Exception ex) {
@@ -99,7 +95,7 @@ public class VentaService implements Serializable {
     private static String getJoiningNamesProducts(Map<Integer, Map<String, Object>> dataFormatted) {
     	return dataFormatted.entrySet()
                 .stream()
-                .map(e -> String.valueOf(e.getValue().get("id") + " - " + e.getValue().get("nombre")+ " - " + e.getValue().get("cantidad")))
+                .map(e -> String.valueOf(e.getValue().get("id") + " - " + e.getValue().get("nombre")+ " - " + e.getValue().get("cantidad") + " - " + e.getValue().get("talla")))
                 .collect(Collectors.joining(";")); 
     }
 
